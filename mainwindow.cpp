@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QTimer>
+#include "sswraper.h"
 
 #include <QDebug>
 
@@ -15,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     if (refreshTime) {
         refreshTimer.start(refreshTime*1000);
     }
+    updateModel();
+    ui->mainView->setModel(&resultModel);
 }
 
 MainWindow::~MainWindow()
@@ -24,8 +27,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateModel()
 {
-    static int count = 0;
-    qDebug() << ++count << " shot";
+    QStringList ssStdOut = ss.execute();
+    resultModel.update((ssResultModel::SS_CONNECTION_TYPE)ui->socketTypesCombo->currentIndex(),
+                       (ssResultModel::SS_IP_VERSION)ui->ipVersionsCombo->currentIndex(),
+                       ssStdOut);
+    //ui->mainView->resizeColumnsToContents();
     refreshTimer.start();
 }
 
@@ -37,4 +43,14 @@ void MainWindow::on_refreshTimeSpin_valueChanged(int value)
     else {
         refreshTimer.stop();
     }
+}
+
+void MainWindow::on_ipVersionsCombo_currentIndexChanged(int)
+{
+    updateModel();
+}
+
+void MainWindow::on_socketTypesCombo_currentIndexChanged(int)
+{
+    updateModel();
 }

@@ -13,8 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    sswraper.cpp \
+    ssresultmodel.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    sswraper.h \
+    ssresultmodel.h
 
 FORMS    += mainwindow.ui
