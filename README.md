@@ -1,4 +1,6 @@
-sensor-monitor
+socket-monitor
 ==============
 
-Sensor Monitor is a GUI for Linux 'ss' command.
+Socket Monitor is a GUI for Linux 'ss' command.
+
+![screenshot](screenshot.png?raw=true)
