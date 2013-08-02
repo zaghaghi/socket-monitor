@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,11 @@ public:
     
 private:
     Ui::MainWindow *ui;
+    QTimer refreshTimer;
+
+private slots:
+    void updateModel();
+    void on_refreshTimeSpin_valueChanged(int arg1);
 };
 
 #endif // MAINWINDOW_H
